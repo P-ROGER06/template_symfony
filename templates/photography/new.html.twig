@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}New Photography
+{% endblock %}
+
+{% block body %}
+	<div class="col-4 card bg-dark mt-5 mx-auto">
+		<h1 class="text-light mt-2 mb-5">Ajouter<br>UNE<br>IMAGE</h1>
+		{{ form_start(form) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form.media) }}
+		<div class="date-form">
+			{{ form_row(form.date) }}
+		</div>
+		<button class="btn btn-secondary mb-5 mt-2">{{ button_label|default('Save') }}</button>
+		{{ form_end(form) }}
+	</div>
+	<a href="{{ path('photography_index') }}">back to list</a>
+{% endblock %}

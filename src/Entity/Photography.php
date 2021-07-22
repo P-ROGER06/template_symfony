@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\PhotographyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=PhotographyRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Photography
 {
@@ -23,14 +25,9 @@ class Photography
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $media;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture_date;
 
     /**
      * @ORM\Column(type="datetime")
@@ -46,6 +43,11 @@ class Photography
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="photographies")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
 
     public function getId(): ?int
     {
@@ -72,18 +74,6 @@ class Photography
     public function setMedia(?string $media): self
     {
         $this->media = $media;
-
-        return $this;
-    }
-
-    public function getPictureDate(): ?string
-    {
-        return $this->picture_date;
-    }
-
-    public function setPictureDate(?string $picture_date): self
-    {
-        $this->picture_date = $picture_date;
 
         return $this;
     }
@@ -122,5 +112,36 @@ class Photography
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+    
+    /**
+     * Gets triggered only on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * Gets triggered only on update
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime();
     }
 }

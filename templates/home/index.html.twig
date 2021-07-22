@@ -1,20 +1,114 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="row col-12">
+		<div class="triangle"></div>
+	</div>
+	<div class="avatar-circle card col-4 border-0 bg-transparent d-flex float-left justify-content-center align-items-center">
+		<img class="circle" src="{{ asset('build/circle.png') }}">
+		<img class="avatar" src="{{ asset('build/avatar.png') }}">
+	</div>
+	<div class="background mt-5 bg-dark">
+		<div class="col-6 mx-auto">
+			<div class="mt-2 d-flex justify-content-inline">
+				<div class="card col-4 text-light bg-transparent border-0">
+					<h1>Roger<br>Jean</h1>
+				</div>
+				<div class="card col-10 text-light bg-transparent text-justify border-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+			</div>
+			<div class="d-flex justify-content-center mt-5">
+				<a class="text-light" href="#page-1">
+					<h2 class="zoom-child ">
+						<i class="fas fa-angle-double-down"></i>
+					</h2>
+				</a>
+			</div>
+		</div>
+		<scroll-container>
+			<scroll-page id="page-1"></scroll-page>
+		</scroll-container>
+		<div class="card-deck col-10 mx-auto photography text-light">
+			<div class="vertical mr-5"></div>
+			<div class="col-6 pt-5 card bg-transparent border-0">
+				<a href="{{ asset('build/1.jpg') }}" target="blank">
+					<img src="{{ asset('build/1.jpg') }}" class="card-img-top rounded-lg shadow" alt="...">
+				</a>
+				<div class="card-body">
+					<h5 class="card-title">Vallée</h5>
+					<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				</div>
+			</div>
+			<div class="col-6 pt-5 card bg-transparent border-0">
+				<a href="{{ asset('build/2.jpg') }}" target="blank">
+					<img src="{{ asset('build/2.jpg') }}" class="card-img-top rounded-lg shadow" alt="...">
+				</a>
+				<div class="card-body">
+					<h5 class="card-title">Lac</h5>
+					<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+				</div>
+			</div>
+			<div class="vertical ml-5"></div>
+		</div>
+		<nav class="d-flex justify-content-center mt-5" aria-label="Page navigation example">
+			<ul class="pagination paginator ">
+				<li class="page-item">
+					<a class="page-link text-light border-0 bg-transparent" href="#">Previous</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link text-light border-0 bg-transparent" href="#">1</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link text-light border-0 bg-transparent" href="#">2</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link text-light border-0 bg-transparent" href="#">3</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link text-light border-0 bg-transparent" href="#">Next</a>
+				</li>
+			</ul>
+		</nav>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/philippe-roger/Bureau/template_symfony/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/philippe-roger/Bureau/template_symfony/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+		<scroll-container>
+			<scroll-page id="page-2"></scroll-page>
+			<div class="card bg-transparent border-0  pt-2">
+				<h1 class="text-light ml-5 mt-5">New<br>photographies</h1>
+				<div class="slide card col-8 mx-auto bg-transparent border-0 mt-5">
+					<div id="carouselExampleInterval" class="carousel slide" data-touch="true" data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<a href="{{ asset('build/3.jpg') }}" target="blank">
+									<img src="{{ asset('build/3.jpg') }}" class="slide-photo mx-auto d-block" alt="...">
+								</a>
+							</div>
+							<div class="carousel-item">
+								<a href="{{ asset('build/4.jpg') }}" target="blank">
+									<img src="{{ asset('build/4.jpg') }}" class="slide-photo mx-auto d-block" alt="...">
+								</a>
+							</div>
+							<div class="carousel-item">
+								<a href="{{ asset('build/1.jpg') }}" target="blank">
+									<img src="{{ asset('build/1.jpg') }}" class="slide-photo mx-auto d-block" alt="...">
+								</a>
+							</div>
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+							<span class="text-white row" aria-hidden="true">
+								<i class="fas fa-chevron-left"></i>
+							</span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+							<span class="text-white row" aria-hidden="true">
+								<i class="fas fa-chevron-right"></i>
+							</span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="horizontal mx-auto"></div>
+		</scroll-container>
+	</div>
 {% endblock %}

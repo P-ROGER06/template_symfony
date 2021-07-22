@@ -6,10 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -26,7 +29,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
@@ -52,12 +55,12 @@ class User implements UserInterface
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
 
@@ -113,6 +116,13 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addRoles(array $roles): self
+    {
+        $this->roles[] = $roles;
 
         return $this;
     }
@@ -188,24 +198,24 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getcreated_at(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setcreated_at(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getupdated_at(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setupdated_at(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -240,5 +250,24 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+       /**
+     * Gets triggered only on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * Gets triggered only on update
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime();
     }
 }
